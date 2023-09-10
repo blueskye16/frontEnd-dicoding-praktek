@@ -1,3 +1,9 @@
+:root {
+    --mainColor: #352F44;
+    --scndColor:#5C5470;
+    --trtColor: #FAF0E6;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -6,10 +12,13 @@
 
 body, input, button {
     font-family: 'Open Sans', sans-serif;
+    background-color: var(--mainColor);
+    color: var(--trtColor)
 }
 
 input, button {
     font-size: 16px;
+    border: none;
 }
 
 .head_bar {
@@ -17,16 +26,17 @@ input, button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: cornflowerblue;
-    color: white;
+    background-color: var(--scndColor);
+    color: var(--trtColor);
 }
 
 main {
     max-width: 800px;
     width: 80%;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 16px;
-
+    background-color: var(--scndColor);
+    border-radius: 20px;
 }
 
 .input_section {
@@ -39,7 +49,7 @@ main {
 
 .input_section > h2 {
     text-align: center;
-    color: cornflowerblue;
+    color: var(--trtColor);
 }
 
 .input_section > form > .input {
@@ -47,8 +57,8 @@ main {
 }
 
 .input_section > form > button {
-    background-color: cornflowerblue;
-    color: white;
+    background-color: var(--mainColor);
+    color: var(--trtColor);
     border: 0;
     border-radius: 5px;
     display: block;
@@ -68,10 +78,10 @@ main {
     border-radius: 5px;
 }
 
-
 .input_section > form > .input > label {
-    color: cornflowerblue;
+    color: var(--trtColor);
     font-weight: bold;
+    margin-left: 2px;
 }
 
 .input_section > form > .input_inline {
@@ -81,9 +91,13 @@ main {
 }
 
 .input_section > form > .input_inline > label {
-    color: cornflowerblue;
+    color: var(--trtColor);
     font-weight: bold;
-    margin-right: 10px;
+    margin: 0 2px;
+}
+
+.input_section > form > .input > input {
+    margin-top: 2px;
 }
 
 .search_section {
@@ -134,7 +148,7 @@ main {
 }
 
 .book_shelf > h2 {
-    color: cornflowerblue;
+    color: var(--trtColor);
 }
 
 .book_shelf > .book_list {
@@ -168,4 +182,8 @@ main {
 .book_shelf > .book_list > .book_item > .action > .red {
     background-color: darkred;
     color: white;
+}
+
+.hidden {
+    display: none;
 }
