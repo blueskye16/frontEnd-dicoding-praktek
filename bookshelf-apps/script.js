@@ -2,6 +2,7 @@ const bookshelfData = [];
 const RENDER_EVENT = "render-bookshelf";
 const SAVED_EVENT = "saved-todo";
 const STORAGE_KEY = "TODO_APPS";
+const checkBox = document.getElementById("inputBookIsComplete");
 
 function isStorageExist() {
   if (typeof Storage === undefined) {
@@ -23,12 +24,28 @@ function saveData() {
   }
 }
 
+function loadDataFromStorage() {
+  const serializedData = localStorage.getItem(STORAGE_KEY);
+  let data = JSON.parse(serializedData);
+
+  if (data !== null) {
+    for (const book of data) {
+      bookshelfData.push(book);
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const submitForm = document.getElementById("inputBook");
   submitForm.addEventListener("submit", function (event) {
     event.preventDefault();
     addBook();
   });
+  if (isStorageExist()) {
+    loadDataFromStorage();
+  }
 });
 
 function generateId() {
@@ -56,7 +73,7 @@ function addBook() {
     textTitle,
     textAuthor,
     textYear,
-    false
+    checkBox.checked
   );
   bookshelfData.push(bookObject);
 
@@ -142,14 +159,6 @@ function makeBook(bookObject) {
   return container;
 }
 
-// function btnChange(bookObject) {
-//   if (bookObject.isCompleted) {
-//     btnGreen.addEventListener("click", function () {
-//       addBookToCompleted(bookObject.id);
-//     });
-//   }
-// }
-
 function addBookToCompleted(bookId) {
   const bookTarget = findBook(bookId);
 
@@ -198,3 +207,13 @@ function findBookIndex(bookId) {
 
   return -1;
 }
+
+checkBox.addEventListener("click", function () {
+  if (checkBox.checked === true) {
+    document.getElementById("bookSubmit").innerHTML =
+      "Masukkan Buku ke rak <span>Selesai Dibaca</span>";
+  } else {
+    document.getElementById("bookSubmit").innerHTML =
+      "Masukkan Buku ke rak <span>Belum Selesai Dibaca</span>";
+  }
+});
